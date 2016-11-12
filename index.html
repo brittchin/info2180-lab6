@@ -2,20 +2,36 @@
 <html>
     <body>
         <input id ="searchValue" type="text" name="search">
-        <button onclick="getDocument()">Search</button>
+        <button onclick="getDefinition()">Search</button>
+        <button onclick= "getAllDefinitions()">Get All Definitions</button>
         <div id="result"></div>
         
         <script>
-        function getDocument(){
+        function getDefinition(){
             var data = document.getElementById("searchValue").value;
             var httpRequest = new XMLHttpRequest();
             httpRequest.onreadystatechange = function(){
                 if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
-                    document.getElementById("result").innerHTML= this.responseText;
+                    document.getElementById("result").innerHTML= httpRequest.responseText;
                     //alert(this.responseText);
                 }
             };
             httpRequest.open('GET', "request.php?q="+data,true);
+            httpRequest.send();
+        }
+        function getAllDefinitions(){
+            var data = document.getElementById("searchValue").value;
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+                    var response = httpRequest.responseXML;
+                    console.log(response);
+                    // for(x=0;x<response.length;x++){
+                        
+                    // }
+                }
+            };
+            httpRequest.open('GET', "request.php?q=&all=true",true);
             httpRequest.send();
         }
         </script>
