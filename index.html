@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <button onclick="getDocument()">Search</button>
         <input id ="searchValue" type="text" name="search">
+        <button onclick="getDocument()">Search</button>
+        <div id="result"></div>
+        
         <script>
         function getDocument(){
+            var data = document.getElementById("searchValue").value;
             var httpRequest = new XMLHttpRequest();
-            var url = "request.php?q=definition";
             httpRequest.onreadystatechange = function(){
-                if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                    if (httpRequest.status === 200) {
-                        var response = httpRequest.responseText;
-                        alert(response);
-                    } else {
-                        alert('There was a problem with the request.');
-                    }
+                if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200) {
+                    document.getElementById("result").innerHTML= this.responseText;
+                    //alert(this.responseText);
                 }
             };
-            httpRequest.open('GET', url);
+            httpRequest.open('GET', "request.php?q="+data,true);
             httpRequest.send();
         }
         </script>
