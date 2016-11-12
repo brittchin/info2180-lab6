@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button onclick="alert ('Definition');">Search</button>
+        <script>
+            var httpRequest = new XMLHttpRequest();
+            var url = "request.php?q=definition";
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+                        var response = httpRequest.responseText;
+                        alert(response);
+                    } else {
+                        alert('There was a problem with the request.');
+                    }
+                }
+            };
+            httpRequest.open('GET', url);
+            httpRequest.send();
+        </script>
+    </body>
+</html>
