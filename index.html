@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <button onclick="alert ('Definition');">Search</button>
+        <button onclick="getDocument()">Search</button>
+        <input id ="searchValue" type="text" name="search">
         <script>
+        function getDocument(){
             var httpRequest = new XMLHttpRequest();
             var url = "request.php?q=definition";
             httpRequest.onreadystatechange = function(){
@@ -17,6 +19,7 @@
             };
             httpRequest.open('GET', url);
             httpRequest.send();
+        }
         </script>
     </body>
 </html>
